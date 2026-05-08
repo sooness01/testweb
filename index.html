@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tomori Reserve | 予約サイト</title>
+  <meta name="description" content="Tomori Reserveの予約ページ。使いやすく、見やすく、スマホでも快適に予約できます。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="#">Tomori Reserve</a>
+      <nav class="nav" aria-label="メインナビゲーション">
+        <a href="#features">特長</a>
+        <a href="#flow">ご利用の流れ</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#reserve" class="btn btn-primary">今すぐ予約</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">もっと簡単・もっと安心</p>
+          <h1>予約のしやすさを、
+            <span>ワンランク上へ。</span>
+          </h1>
+          <p class="lead">Tomori Reserveは、予約に必要な情報をわかりやすく整理。スマホでもPCでも、迷わず予約完了まで進めます。</p>
+          <div class="cta-row">
+            <a href="#reserve" class="btn btn-primary">予約する</a>
+            <a href="#features" class="btn btn-ghost">詳しく見る</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <h2>本日の空き状況</h2>
+          <ul>
+            <li><span>10:00</span><strong>◯ 空きあり</strong></li>
+            <li><span>13:00</span><strong>△ 残りわずか</strong></li>
+            <li><span>16:00</span><strong>◯ 空きあり</strong></li>
+            <li><span>19:00</span><strong>× 満席</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>改善ポイント</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>視認性アップ</h3>
+            <p>コントラストと余白を最適化し、必要情報が一目でわかるデザインに。</p>
+          </article>
+          <article class="card">
+            <h3>予約導線を整理</h3>
+            <p>CTAボタンを統一し、どの画面幅でも予約までのクリック数を減らしました。</p>
+          </article>
+          <article class="card">
+            <h3>スマホ最適化</h3>
+            <p>モバイル表示を前提に、文字サイズ・タップ領域・レイアウトを改善。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="flow" class="section alt">
+      <div class="container">
+        <h2>ご利用の流れ</h2>
+        <ol class="steps">
+          <li>日時を選択</li>
+          <li>必要情報を入力</li>
+          <li>内容を確認して予約完了</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="reserve" class="section reserve">
+      <div class="container">
+        <h2>予約フォーム（デモ）</h2>
+        <form class="reserve-form" id="reserveForm">
+          <label>
+            お名前
+            <input type="text" required placeholder="山田 太郎" />
+          </label>
+          <label>
+            メールアドレス
+            <input type="email" required placeholder="example@mail.com" />
+          </label>
+          <label>
+            ご希望日
+            <input type="date" required />
+          </label>
+          <label>
+            ご希望時間
+            <select required>
+              <option value="">選択してください</option>
+              <option>10:00</option>
+              <option>13:00</option>
+              <option>16:00</option>
+            </select>
+          </label>
+          <button type="submit" class="btn btn-primary full">この内容で予約する</button>
+          <p class="form-note" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>よくある質問</h2>
+        <details>
+          <summary>予約の変更はできますか？</summary>
+          <p>はい。確認メール内のリンクから変更できます。</p>
+        </details>
+        <details>
+          <summary>当日予約は可能ですか？</summary>
+          <p>空き状況によって可能です。最新枠を予約画面でご確認ください。</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>© 2026 Tomori Reserve</p>
+      <a href="#" aria-label="トップへ戻る">↑ Top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
