@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>マンスリーオート | Preview Viewer</title>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f4f6f9;color:#1e293b}
+    .box{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:28px;box-shadow:0 10px 30px rgba(15,23,42,.08);max-width:560px;line-height:1.7}
+    small{color:#64748b}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <strong>プレビューを読み込み中です...</strong><br>
+    <small>数秒お待ちください。</small>
+  </div>
+  <script>
+    async function base64ToBytes(base64) {
+      const binary = atob(base64);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return bytes;
+    }
+
+    async function ungzip(bytes) {
+      if (!('DecompressionStream' in window)) {
+        throw new Error('このブラウザはDecompressionStreamに対応していません。ChromeまたはEdge最新版で開いてください。');
+      }
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+      return await new Response(stream).text();
+    }
+
+    (async () => {
+      const source = await fetch('./index.html?payload=' + Date.now(), {cache: 'no-store'}).then(r => r.text());
+      const matched = source.match(/compressedBase64\s*=\s*'([^']+)'/);
+      if (!matched) throw new Error('ページデータが見つかりませんでした。');
+      const html = await ungzip(await base64ToBytes(matched[1]));
+      document.open();
+      document.write(html);
+      document.close();
+    })().catch(error => {
+      console.error(error);
+      document.body.innerHTML = '<div class="box"><strong>読み込みに失敗しました。</strong><br><small>' + String(error.message || error) + '</small></div>';
+    });
+  </script>
+</body>
+</html>
