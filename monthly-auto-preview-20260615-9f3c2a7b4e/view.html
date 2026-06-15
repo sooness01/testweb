@@ -36,7 +36,11 @@
     }
 
     (async () => {
-      const source = await fetch('./index.html?payload=' + Date.now(), {cache: 'no-store'}).then(r => r.text());
+      const payloadUrl = 'https://raw.githubusercontent.com/sooness01/testweb/gh-pages/monthly-auto-preview-20260615-9f3c2a7b4e/index.html?payload=' + Date.now();
+      const source = await fetch(payloadUrl, {cache: 'no-store'}).then(r => {
+        if (!r.ok) throw new Error('元データの取得に失敗しました: ' + r.status);
+        return r.text();
+      });
       const matched = source.match(/compressedBase64\s*=\s*'([^']+)'/);
       if (!matched) throw new Error('ページデータが見つかりませんでした。');
       const html = await ungzip(await base64ToBytes(matched[1]));
